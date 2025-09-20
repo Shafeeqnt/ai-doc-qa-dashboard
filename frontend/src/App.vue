@@ -1,0 +1,116 @@
+<template>
+  <div id="app">
+    <h1>🤖 AI Document Q&A Dashboard</h1>
+
+    <FileUpload @uploaded="onUploaded" />
+    <QnA v-if="filename" :filename="filename" />
+  </div>
+</template>
+
+<script>
+import FileUpload from "./components/FileUpload.vue";
+import QnA from "./components/QnA.vue";
+
+export default {
+  components: { FileUpload, QnA },
+  data() {
+    return { filename: null };
+  },
+  methods: {
+    onUploaded(response) {
+      this.filename = response.filename;
+    },
+  },
+};
+</script>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+#app {
+  text-align: center;
+  padding: 20px;
+}
+
+.upload-box,
+.qna-box {
+  background: #2a2a2a;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 700px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+button {
+  background: #3b82f6;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+button:hover {
+  background: #2563eb;
+}
+
+input[type="file"],
+input[type="text"],
+input[type="search"] {
+  background: #3a3a3a;
+  border: none;
+  color: #e0e0e0;
+  padding: 10px;
+  border-radius: 6px;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.chat-box {
+  background: #1e1e1e;
+  border-radius: 8px;
+  padding: 15px;
+  height: 60vh;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.message-user {
+  text-align: right;
+  margin: 8px 0;
+}
+
+.message-user span {
+  display: inline-block;
+  background: #3b82f6;
+  padding: 8px 12px;
+  border-radius: 12px;
+  color: white;
+}
+
+.message-ai {
+  text-align: left;
+  margin: 8px 0;
+}
+
+.message-ai span {
+  display: inline-block;
+  background: #444;
+  padding: 8px 12px;
+  border-radius: 12px;
+  color: #e0e0e0;
+}
+
+.input-area {
+  display: flex;
+}
+</style>
