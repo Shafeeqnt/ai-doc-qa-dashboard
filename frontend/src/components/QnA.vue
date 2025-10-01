@@ -50,7 +50,7 @@ export default {
         formData.append("filename", this.filename);
         formData.append("question", q);
 
-        const res = await axios.post("http://127.0.0.1:8000/ask", formData);
+        const res = await axios.post("https://ai-doc-qa-dashboard-2.onrender.com/ask", formData);
 
         this.messages.push({ role: "assistant", content: res.data.answer });
       } catch (err) {
