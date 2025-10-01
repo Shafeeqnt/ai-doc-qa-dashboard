@@ -1,4 +1,4 @@
-name: Backend CI
+name: Backend CI/CD
 
 on:
   push:
@@ -29,3 +29,15 @@ jobs:
         run: |
           cd backend
           pytest || echo "No tests yet"
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'   # only deploy main branch
+
+    steps:
+      - name: Deploy to Render
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          serviceId: ${{ secrets.RENDER_SERVICE_ID }}
+          apiKey: ${{ secrets.RENDER_API_KEY }}
